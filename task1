@@ -1,0 +1,57 @@
+using System;
+
+namespace mass2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random random = new Random();
+            int n = random.Next(10);
+            int[,] a = new int[n, n];
+            int[] b = new int[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    a[i, j] = random.Next(10);
+                    Console.Write($"{a[i, j]} ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("New matrix");
+
+            for (int i = 0; i < n; i++)
+            {
+                b[i] = random.Next(10);
+                Console.Write($"{b[i]} ");
+            }
+            //Console.Write($"{Multiplication(a,b)} ");
+            Console.WriteLine("\nNew matrix");
+            Print(Multiplication(a, b));
+        }
+        static int[] Multiplication(int[,] a, int[] b)
+        {
+            if (a.GetLength(1) != b.GetLength(0)) throw new Exception("Матрицы нельзя перемножить");
+            int[] r = new int[b.Length];
+            for (int i = 0; i < b.Length; i++)
+            {
+                for (int j = 0; j < a.GetLength(1); j++)
+                {
+                    r[i] += a[i, j] * b[i];                                       
+                }
+            }
+            return r;
+        }
+        static void Print(int[] a)
+        {
+            for (int i = 0; i < a.GetLength(0); i++)
+            {
+                Console.Write("{0} ", a[i]);
+                
+                Console.WriteLine();
+            }
+        }
+    }
+}
